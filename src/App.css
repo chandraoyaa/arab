@@ -1,0 +1,225 @@
+.app-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.app-header {
+  text-align: center;
+  padding: 1.5rem;
+  border-radius: var(--radius-lg);
+  animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.app-header h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.icon-sparkle {
+  animation: bounce 2s infinite;
+}
+
+.app-header p {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+}
+
+.app-main {
+  display: flex;
+  gap: 2rem;
+  flex: 1;
+}
+
+/* Board Section */
+.board-section {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.board-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  min-height: 500px;
+}
+
+.letter-header {
+  padding: 1rem;
+  text-align: center;
+  color: white;
+  font-size: 2rem;
+  font-weight: 700;
+  transition: background-color 0.3s ease;
+}
+
+.drawing-container {
+  flex: 1;
+  position: relative;
+  background-image: radial-gradient(#e0e0e0 2px, transparent 2px);
+  background-size: 30px 30px;
+  background-color: white;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  overflow: hidden;
+}
+
+.guide-letter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 350px;
+  font-weight: 700;
+  color: rgba(200, 200, 200, 0.3);
+  pointer-events: none; /* Let clicks pass through to canvas */
+  user-select: none;
+  font-family: 'Arial', sans-serif; /* Fallback for Arabic */
+}
+
+.drawing-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: crosshair;
+  touch-action: none; /* Prevent scrolling while drawing on mobile */
+}
+
+/* Controls */
+.controls {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.control-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-main);
+  border-radius: var(--radius-md);
+}
+
+.control-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.control-btn:not(:disabled):hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+}
+
+.clear-btn {
+  background-color: #ffebee;
+  color: var(--danger-color);
+  border-color: rgba(244, 67, 54, 0.3);
+}
+
+/* Sidebar Section */
+.sidebar-section {
+  flex: 1;
+  animation: popIn 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.letter-selector {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+}
+
+.letter-selector h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.letters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 1rem;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+  max-height: calc(100vh - 250px);
+}
+
+/* Custom Scrollbar */
+.letters-grid::-webkit-scrollbar {
+  width: 8px;
+}
+.letters-grid::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+}
+.letters-grid::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+.letter-btn {
+  aspect-ratio: 1;
+  border-radius: var(--radius-sm);
+  border: 2px solid #ddd;
+  font-size: 2.5rem;
+  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: white;
+}
+
+.letter-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-top: 0.2rem;
+}
+
+.letter-btn:hover {
+  transform: scale(1.05);
+  box-shadow: var(--shadow-sm);
+}
+
+.letter-btn.active {
+  transform: scale(1.1);
+  box-shadow: var(--shadow-md);
+  z-index: 1;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .app-main {
+    flex-direction: column;
+  }
+  
+  .sidebar-section {
+    order: -1; /* Move selector to top on mobile */
+  }
+  
+  .letters-grid {
+    max-height: 200px; /* Limit height on mobile */
+  }
+}
