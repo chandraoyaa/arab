@@ -1,21 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
-
 :root {
   --primary-color: #4CAF50;
   --primary-light: #81C784;
   --secondary-color: #FFC107;
   --accent-color: #FF9800;
   --danger-color: #F44336;
-  --background-color: #E8F5E9;
-  --card-bg: rgba(255, 255, 255, 0.85);
-  --text-main: #333333;
-  --text-muted: #666666;
+  --text-main: #2c3e50;
+  --text-muted: #7f8c8d;
   --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 8px 15px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 15px 25px rgba(0, 0, 0, 0.15);
-  --radius-sm: 12px;
-  --radius-md: 20px;
-  --radius-lg: 30px;
+  --shadow-md: 0 10px 20px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.12);
+  --radius-sm: 16px;
+  --radius-md: 24px;
+  --radius-lg: 32px;
 }
 
 * {
@@ -25,53 +21,91 @@
 }
 
 body {
-  font-family: 'Nunito', sans-serif;
-  background-color: var(--background-color);
-  background-image: radial-gradient(circle at 50% 50%, #ffffff 0%, transparent 80%),
-                    radial-gradient(circle at 10% 20%, #FFF9C4 0%, transparent 40%),
-                    radial-gradient(circle at 90% 80%, #B2DFDB 0%, transparent 40%);
+  font-family: 'Fredoka', sans-serif;
   color: var(--text-main);
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow-x: hidden;
+  /* Magical Animated Background */
+  background: linear-gradient(-45deg, #FFB6C1, #87CEFA, #FFE4E1, #E0FFFF);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Background Blobs for more aesthetics */
+body::before, body::after {
+  content: "";
+  position: fixed;
+  border-radius: 50%;
+  z-index: -1;
+  filter: blur(80px);
+  opacity: 0.6;
+}
+
+body::before {
+  width: 400px;
+  height: 400px;
+  background: #ffeb3b;
+  top: -100px;
+  left: -100px;
+  animation: float1 10s ease-in-out infinite alternate;
+}
+
+body::after {
+  width: 500px;
+  height: 500px;
+  background: #ff9a9e;
+  bottom: -150px;
+  right: -100px;
+  animation: float2 12s ease-in-out infinite alternate;
+}
+
+@keyframes float1 {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(50px, 50px) scale(1.1); }
+}
+
+@keyframes float2 {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(-50px, -50px) scale(1.2); }
 }
 
 button {
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Fredoka', sans-serif;
   cursor: pointer;
   border: none;
   outline: none;
-  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); /* bouncy transition */
 }
 
 button:active {
-  transform: scale(0.95);
+  transform: scale(0.92) !important; /* Force bouncy click feel */
 }
 
 .glass-panel {
-  background: var(--card-bg);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 2px solid rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 2px solid rgba(255, 255, 255, 0.8);
   box-shadow: var(--shadow-lg);
   border-radius: var(--radius-lg);
 }
 
 /* Animations */
 @keyframes popIn {
-  0% { opacity: 0; transform: scale(0.8); }
-  100% { opacity: 1; transform: scale(1); }
+  0% { opacity: 0; transform: scale(0.9) translateY(20px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
 }
 
 @keyframes bounce {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
-}
-
-@keyframes drawPulse {
-  0% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.4); }
-  70% { box-shadow: 0 0 0 15px rgba(76, 175, 80, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0); }
+  50% { transform: translateY(-8px); }
 }
